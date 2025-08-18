@@ -1,0 +1,16 @@
+services:
+  app:
+    # Descarga la imagen de Docker Hub
+    image: tu-usuario-de-dockerhub/trading-calculator:latest
+    restart: always
+
+  nginx:
+    image: nginx:alpine
+    restart: always
+    ports:
+      # Usaremos el puerto 8080 para no interferir con otros servicios locales
+      - "8080:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - app
