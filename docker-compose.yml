@@ -1,7 +1,7 @@
 services:
   app:
     # Descarga la imagen de Docker Hub
-    image: tu-usuario-de-dockerhub/trading-calculator:latest
+    image: ale90qm/calcprob-trading:latest
     restart: always
 
   nginx:
