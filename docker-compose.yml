@@ -1,5 +1,6 @@
 services:
   app:
+    container_name: calcprob-trading
     # Especifica la imagen a descargar desde Docker Hub.
     image: ale90qm/calcprob-trading:latest
     # Reinicia el contenedor automáticamente si falla.
@@ -10,6 +11,7 @@ services:
       - app-code:/var/www/html
 
   nginx:
+    container_name: calcprob-nginx
     # Usa la imagen oficial y ligera de Nginx.
     image: nginx:alpine
     # Reinicia el contenedor automáticamente si falla.
