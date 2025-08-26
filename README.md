@@ -52,7 +52,7 @@ Para actualizar la aplicación a la última versión disponible en Docker Hub, s
 docker compose pull
 
 # 2. Levanta de nuevo los contenedores. Docker Compose recreará solo lo que ha cambiado.
-docker compose down --volumes --rmi all && docker compose up --build -d
+docker compose up -d
 ```
 
 ---
