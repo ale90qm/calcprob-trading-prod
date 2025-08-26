@@ -1,37 +1,20 @@
 services:
   app:
-    container_name: calcprob-trading-prod
-    # Especifica la imagen a descargar desde Docker Hub.
+    container_name: calcprob-trading-prod-app
     image: ale90qm/calcprob-trading:latest
-    # Reinicia el contenedor automáticamente si falla.
     restart: always
-    # Monta el volumen 'app-code' en la ruta donde la imagen tiene el código.
-    # Esto hace que el código (index.php) esté disponible para otros contenedores.
-    volumes:
-      - app-code:/var/www/html
+    # NO HAY VOLÚMENES AQUÍ. El código vive y muere dentro de la imagen.
 
   nginx:
-    container_name: calcprob-nginx
-    # Usa la imagen oficial y ligera de Nginx.
+    container_name: calcprob-trading-prod-nginx
     image: nginx:alpine
-    # Reinicia el contenedor automáticamente si falla.
     restart: always
     ports:
-      # Expone el puerto 80 del servidor y lo redirige al puerto 80 de Nginx.
-      # Este es el puerto estándar para el tráfico web HTTP.
       - "8080:80"
     volumes:
-      # Monta el volumen de código compartido en modo de solo lectura (ro).
-      # Nginx necesita leer index.php para saber que debe pasarlo a PHP-FPM.
-      - app-code:/var/www/html:ro
-      # Monta el archivo de configuración local de Nginx sobre el de por defecto.
+      # Nginx solo necesita SU PROPIO archivo de configuración. Nada más.
       - ./nginx.conf:/etc/nginx/conf.d/default.conf
-    # Le dice a Docker que este contenedor no debe iniciarse hasta que el
-    # contenedor 'app' (PHP-F-PM) esté listo.
     depends_on:
       - app
 
-# Define el volumen con nombre que actúa como un disco compartido
-# entre los contenedores 'app' y 'nginx'.
-volumes:
-  app-code:
+# YA NO NECESITAMOS LA SECCIÓN 'volumes:' AL FINAL.
