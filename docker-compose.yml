@@ -1,6 +1,6 @@
 services:
   app:
-    container_name: calcprob-trading
+    container_name: calcprob-trading-prod
     # Especifica la imagen a descargar desde Docker Hub.
     image: ale90qm/calcprob-trading:latest
     # Reinicia el contenedor automáticamente si falla.
